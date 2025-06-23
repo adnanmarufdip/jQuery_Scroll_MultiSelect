@@ -1,0 +1,291 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Scroll Multi-Select Plugin Demo</title>
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+    <link href="css/jquery-multiselect.css" rel="stylesheet" />
+    <script src="js/jquery-multiselect.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f9fafb;
+            padding: 2rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+            .title h1 {
+                font-size: 2.5rem;
+                font-weight: bold;
+                color: #111827;
+                margin-bottom: 1rem;
+            }
+
+            .title p {
+                font-size: 1.125rem;
+                color: #6b7280;
+            }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 1024px) {
+            .demo-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .demo-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        }
+
+            .demo-section h2 {
+                font-size: 1.25rem;
+                font-weight: 600;
+                color: #1f2937;
+                margin-bottom: 1rem;
+            }
+
+        .selected-values {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #dbeafe;
+            border-radius: 0.5rem;
+        }
+
+            .selected-values.frameworks {
+                background-color: #dcfce7;
+            }
+
+            .selected-values h3 {
+                font-weight: 500;
+                color: #1e40af;
+                margin-bottom: 0.5rem;
+                margin-top: 0;
+            }
+
+            .selected-values.frameworks h3 {
+                color: #166534;
+            }
+
+            .selected-values pre {
+                font-size: 0.875rem;
+                color: #1e40af;
+                background: #bfdbfe;
+                padding: 0.5rem;
+                border-radius: 0.25rem;
+                overflow-x: auto;
+                margin: 0;
+            }
+
+            .selected-values.frameworks pre {
+                color: #166534;
+                background: #bbf7d0;
+            }
+
+        .instructions {
+            margin-top: 2rem;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        }
+
+            .instructions h2 {
+                font-size: 1.25rem;
+                font-weight: 600;
+                color: #1f2937;
+                margin-bottom: 1rem;
+                margin-top: 0;
+            }
+
+            .instructions ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .instructions li {
+                margin-bottom: 0.75rem;
+                color: #6b7280;
+            }
+
+            .instructions strong {
+                color: #1f2937;
+            }
+
+        .code-example {
+            margin-top: 2rem;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        }
+
+            .code-example h2 {
+                margin-top: 0;
+                margin-bottom: 1rem;
+            }
+
+            .code-example pre {
+                font-size: 0.875rem;
+                background: #f3f4f6;
+                padding: 1rem;
+                border-radius: 0.5rem;
+                overflow-x: auto;
+                color: #374151;
+                margin: 0;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">
+            <h1>jQuery Scroll Multi-Select Plugin</h1>
+            <p>A flexible multi-select component with scroll and search functionality</p>
+        </div>
+
+        <div class="demo-grid">
+            <!-- Programming Languages Multi-Select -->
+            <div class="demo-section">
+                <h2>Programming Languages</h2>
+                <div id="tech-multiselect"></div>
+                <div class="selected-values">
+                    <h3>Selected Values Array:</h3>
+                    <pre class="selected-array">[]</pre>
+                </div>
+            </div>
+
+            <!-- CSS Frameworks Multi-Select -->
+            <div class="demo-section">
+                <h2>CSS Frameworks</h2>
+                <div id="framework-multiselect"></div>
+                <div class="selected-values frameworks">
+                    <h3>Selected Values Array:</h3>
+                    <pre class="selected-array">[]</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Usage Instructions -->
+        <div class="instructions">
+            <h2>Usage Instructions</h2>
+            <ul>
+                <li><strong>✓ Scroll:</strong> Use the scroll bar to easily find items by name</li>
+                <li><strong>✓ Search:</strong> Use the search bar to filter items by name</li>
+                <li><strong>✓ Select:</strong> Click on checkboxes or the entire row to select/deselect items</li>
+                <li><strong>✓ Clear All:</strong> Use the "Clear All" button to deselect all items</li>
+                <li><strong>✓ Selected Values:</strong> Get the selected values as an array</li>
+                <li><strong>✓ Responsive:</strong> Works on desktop and mobile devices</li>
+            </ul>
+        </div>
+
+        <!-- Code Example -->
+        <div class="code-example">
+            <h2>Code Example</h2>
+            <pre>// Include jQuery and the plugin files
+&lt;script src="https://code.jquery.com/jquery-3.4.0.min.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="css/jquery-multiselect.css"&gt;
+&lt;script src="js/jquery-multiselect.js"&gt;&lt;/script&gt;
+
+// Initialize multi-select
+$('#my-container').multiSelect({
+    items: [
+        { id: 1, label: 'Option 1', value: 'option1' },
+        { id: 2, label: 'Option 2', value: 'option2' }
+    ],
+    placeholder: 'Select items...',
+    searchPlaceholder: 'Search...',
+    onSelectionChange: function(selectedValues) {
+        console.log('Selected:', selectedValues);
+    }
+});
+
+// Get selected values
+var selected = $('#my-container').multiSelect('getSelectedValues');
+
+// Set selected values
+$('#my-container').multiSelect('setSelectedValues', ['option1', 'option2']);
+
+// Update items
+$('#my-container').multiSelect('updateItems', newItemsArray);
+
+// Destroy plugin
+$('#my-container').multiSelect('destroy');</pre>
+        </div>
+    </div>
+
+    <script>
+        // Sample data
+        var sampleTechnologies = [
+            { id: 1, label: 'JavaScript', value: 'javascript' },
+            { id: 2, label: 'TypeScript', value: 'typescript' },
+            { id: 3, label: 'React', value: 'react' },
+            { id: 4, label: 'Vue.js', value: 'vue' },
+            { id: 5, label: 'Angular', value: 'angular' },
+            { id: 6, label: 'Node.js', value: 'nodejs' },
+            { id: 7, label: 'Python', value: 'python' },
+            { id: 8, label: 'Java', value: 'java' },
+            { id: 9, label: 'C#', value: 'csharp' },
+            { id: 10, label: 'PHP', value: 'php' },
+            { id: 11, label: 'Ruby', value: 'ruby' },
+            { id: 12, label: 'Go', value: 'go' },
+            { id: 13, label: 'Rust', value: 'rust' },
+            { id: 14, label: 'Swift', value: 'swift' },
+            { id: 15, label: 'Kotlin', value: 'kotlin' }
+        ];
+
+        var sampleFrameworks = [
+            { id: 1, label: 'Bootstrap', value: 'bootstrap' },
+            { id: 2, label: 'Tailwind CSS', value: 'tailwind' },
+            { id: 3, label: 'Material-UI', value: 'mui' },
+            { id: 4, label: 'Ant Design', value: 'antd' },
+            { id: 5, label: 'Chakra UI', value: 'chakra' },
+            { id: 6, label: 'Bulma', value: 'bulma' },
+            { id: 7, label: 'Foundation', value: 'foundation' },
+            { id: 8, label: 'Semantic UI', value: 'semantic' }
+        ];
+
+        // Initialize multi-select components
+        $(document).ready(function () {
+            $('#tech-multiselect').multiSelect({
+                items: sampleTechnologies,
+                placeholder: 'Choose programming languages...',
+                searchPlaceholder: 'Search languages...',
+                onSelectionChange: function (selectedValues) {
+                    console.log('Selected Technologies:', selectedValues);
+                    $('#tech-multiselect').siblings('.selected-values').find('.selected-array').text(JSON.stringify(selectedValues, null, 2));
+                }
+            });
+
+            $('#framework-multiselect').multiSelect({
+                items: sampleFrameworks,
+                placeholder: 'Choose CSS frameworks...',
+                searchPlaceholder: 'Search frameworks...',
+                onSelectionChange: function (selectedValues) {
+                    console.log('Selected Frameworks:', selectedValues);
+                    $('#framework-multiselect').siblings('.selected-values').find('.selected-array').text(JSON.stringify(selectedValues, null, 2));
+                }
+            });
+        });
+    </script>
+</body>
+</html>
