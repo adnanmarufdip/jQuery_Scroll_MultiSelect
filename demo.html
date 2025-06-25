@@ -207,7 +207,7 @@
 &lt;script src="js/jquery-multiselect.js"&gt;&lt;/script&gt;
 
 // Initialize multi-select
-$('#my-container').multiSelect({
+$('#my-container').scrollMultiSelect({
     items: [
         { id: 1, label: 'Option 1', value: 'option1' },
         { id: 2, label: 'Option 2', value: 'option2' }
@@ -220,16 +220,16 @@ $('#my-container').multiSelect({
 });
 
 // Get selected values
-var selected = $('#my-container').multiSelect('getSelectedValues');
+var selected = $('#my-container').scrollMultiSelect('getSelectedValues');
 
 // Set selected values
-$('#my-container').multiSelect('setSelectedValues', ['option1', 'option2']);
+$('#my-container').scrollMultiSelect('setSelectedValues', ['option1', 'option2']);
 
 // Update items
-$('#my-container').multiSelect('updateItems', newItemsArray);
+$('#my-container').scrollMultiSelect('updateItems', newItemsArray);
 
 // Destroy plugin
-$('#my-container').multiSelect('destroy');</pre>
+$('#my-container').scrollMultiSelect('destroy');</pre>
         </div>
     </div>
 
@@ -266,7 +266,7 @@ $('#my-container').multiSelect('destroy');</pre>
 
         // Initialize multi-select components
         $(document).ready(function () {
-            $('#tech-multiselect').multiSelect({
+            $('#tech-multiselect').scrollMultiSelect({
                 items: sampleTechnologies,
                 placeholder: 'Choose programming languages...',
                 searchPlaceholder: 'Search languages...',
@@ -276,7 +276,7 @@ $('#my-container').multiSelect('destroy');</pre>
                 }
             });
 
-            $('#framework-multiselect').multiSelect({
+            $('#framework-multiselect').scrollMultiSelect({
                 items: sampleFrameworks,
                 placeholder: 'Choose CSS frameworks...',
                 searchPlaceholder: 'Search frameworks...',

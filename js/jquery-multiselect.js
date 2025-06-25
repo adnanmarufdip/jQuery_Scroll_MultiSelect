@@ -1,10 +1,14 @@
-﻿
+﻿////--Author Information
+////--Author Name: Md.Adnan Maruf
+////--Email: adnan.marufamd@gmail.com
+////--Version: 1.0.0
+
 /**
  * jQuery Scroll Multi-Select Plugin
  * A customizable multi-select component with search functionality
  * 
  * Usage:
- * $('#my-container').multiSelect({
+ * $('#my-container').scrollMultiSelect({
  *   items: [{ id: 1, label: 'Option 1', value: 'option1' }],
  *   placeholder: 'Select items...',
  *   searchPlaceholder: 'Search...',
@@ -20,14 +24,14 @@
         items: [],
         placeholder: 'Select items...',
         searchPlaceholder: 'Search...',
-        maxHeight: '300px',
+        maxHeight: '130px',
         showSelectedPreview: true,
         maxPreviewItems: 3,
         onSelectionChange: function () { }
     };
 
     // Plugin constructor
-    function MultiSelect(element, options) {
+    function ScrollMultiSelect(element, options) {
         this.element = $(element);
         this.options = $.extend({}, defaults, options);
         this.selectedValues = [];
@@ -36,7 +40,7 @@
     }
 
     // Plugin prototype
-    MultiSelect.prototype = {
+    ScrollMultiSelect.prototype = {
         init: function () {
             this.render();
             this.setupEventListeners();
@@ -55,7 +59,7 @@
                     <div class="multi-select-header">
                         <div class="multi-select-header-content">
                             <span class="selection-count">${this.options.placeholder}</span>
-                            <button class="clear-all-btn" style="display: none;">Clear All</button>
+                            <button type="button" class="clear-all-btn" style="display: none;">Clear All</button>
                         </div>
                         ${this.options.showSelectedPreview ? '<div class="selected-items-preview"></div>' : ''}
                     </div>
@@ -65,7 +69,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                             </svg>
                             <input type="text" class="search-input" placeholder="${this.options.searchPlaceholder}">
-                            <button class="clear-search-btn" style="display: none;">
+                            <button type="button" class="clear-search-btn" style="display: none;">
                                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                                 </svg>
@@ -89,11 +93,19 @@
 
             // Clear search
             this.element.find('.clear-search-btn').on('click', function () {
+                // Only prevent default if it's a submit button
+                if ($(this).attr('type') === 'submit') {
+                    e.preventDefault();
+                }
                 self.clearSearch();
             });
 
             // Clear all selections
             this.element.find('.clear-all-btn').on('click', function () {
+                // Only prevent default if it's a submit button
+                if ($(this).attr('type') === 'submit') {
+                    e.preventDefault();
+                }
                 self.clearAllSelections();
             });
         },
@@ -258,20 +270,20 @@
 
         destroy: function () {
             this.element.empty();
-            this.element.removeData('multiSelect');
+            this.element.removeData('scrollMultiSelect');
         }
     };
 
     // jQuery plugin definition
-    $.fn.multiSelect = function (options) {
+    $.fn.scrollMultiSelect = function (options) {
         var args = Array.prototype.slice.call(arguments, 1);
 
         return this.each(function () {
-            var instance = $(this).data('multiSelect');
+            var instance = $(this).data('scrollMultiSelect');
 
             if (!instance) {
-                instance = new MultiSelect(this, options);
-                $(this).data('multiSelect', instance);
+                instance = new ScrollMultiSelect(this, options);
+                $(this).data('scrollMultiSelect', instance);
             } else if (typeof options === 'string') {
                 // Call public methods
                 if (typeof instance[options] === 'function') {
@@ -282,6 +294,6 @@
     };
 
     // Plugin defaults accessible
-    $.fn.multiSelect.defaults = defaults;
+    $.fn.scrollMultiSelect.defaults = defaults;
 
 })(jQuery);
